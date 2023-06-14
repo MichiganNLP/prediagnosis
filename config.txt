@@ -1,0 +1,3 @@
+[DATA_LOCATIONS]
+DIAGPATTERNS_POS = data/diagpatterns_positive.txt
+DEPRESSION_WORDS = data/depression-syns.txt
