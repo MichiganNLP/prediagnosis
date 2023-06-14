@@ -1,3 +1,4 @@
+import argparse
 from datetime import datetime
 import json
 import sys
@@ -10,6 +11,23 @@ from sutime import SUTime
 from nltk.tokenize import sent_tokenize
 
 from src.util import config
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(description='Extract diagnosis time from self-report text')
+    
+    parser.add_argument(
+        '--input_file', type=str, default='data/example_data.json', help='Input file path'
+    )
+    parser.add_argument(
+        '--output_file', type=str, default='output/example_diagnosis_time.json', help='Output file path'
+    )
+    parser.add_argument(
+        '--method', type=str, default='parsing', help='Method to extract diagnosis time'
+    )
+    
+    args = parser.parse_args()
+    return args
 
 
 def get_diagnosis_time(datafile: str, outputfile: str, method: str='parsing'):
@@ -121,4 +139,5 @@ def is_diagnosis_text(text, pattern_pos, depression_words):
 
 
 if __name__ == "__main__":
-    get_diagnosis_time('data/example_data.json', 'output/example_diagnosis_time.json', method='parsing')
+    args = parse_args()
+    get_diagnosis_time(args.input_file, args.output_file, args.method)
